@@ -25,6 +25,9 @@ typedef struct {
 void mostrarPersona(ePersona *e);
 void mostrarPersonas(LinkedList *pArrayListaPersonas);
 ePersona* new_Persona();
+int filtrarMayores(void* pElement);
+int filtrarMujeres(void* pElement);
+int ordenarPersonaNombre(void* pElemento1, void* pElemento2);
 //-------------------------------------------------------
 
 int main(void) {
@@ -36,6 +39,8 @@ int main(void) {
 	int tamListaEmpleados;
 	LinkedList *listaPersonas = ll_newLinkedList();
 	LinkedList* listaEmpleados = ll_newLinkedList();
+	int (*pFiltrado)(void*);
+	int (*pOrdenar)(void*, void*);
 
 	ePersona *persona1 = new_Persona();
 
@@ -191,8 +196,30 @@ int main(void) {
 	//--------------------------------------sort-----------------------------------
 
 
+	puts("\n\n\n-----------------------------------------");
+	puts("Ejemplo: ll_sort ordenando por nombre ascendente o descendente segun el criterio deseado\n");
+	 pOrdenar = ordenarPersonaNombre;
+	 ll_sort(listaEmpleados, pOrdenar, 0); // 0 ascendente, 1 descendente
+	 mostrarPersonas(listaEmpleados);
+
+	 puts("\n\n\n-----------------------------------------");
 
 
+	//-----------------------filter---------------------------------------------
+
+	puts("\n\n\n");
+	puts("Ejemplo: ll_filter");
+
+	puts("Filtrar por mujeres:\n");
+	pFiltrado = filtrarMujeres;
+	LinkedList* mujeres = ll_filter(listaEmpleados, pFiltrado);
+	mostrarPersonas(mujeres);
+
+	puts("\n\n\n");
+	puts("Filtrar por personas mayores a 30 años:\n");
+		pFiltrado = filtrarMayores;
+		LinkedList* mayores = ll_filter(listaEmpleados, pFiltrado);
+		mostrarPersonas(mayores);
 
 
 
@@ -221,5 +248,61 @@ void mostrarPersonas(LinkedList *pArrayListaPersonas) {
 
 ePersona* new_Persona() {
 	return (ePersona*) malloc(sizeof(ePersona));
+
+}
+
+int filtrarMayores(void* pElement)
+{
+	return ((ePersona*) pElement)->edad >= 30;
+	}
+int filtrarMujeres(void* pElement)
+{
+
+	return ((ePersona*) pElement)->sexo == 'f';
+	}
+
+
+
+
+
+int ordenarPersonaNombre(void* pElemento1, void* pElemento2)
+{
+	int todoOk = 0;
+	ePersona* pPersona1 = NULL;
+	ePersona* pPersona2 = NULL;
+	char bufferNombre1[TAM_NOM];
+	char bufferNombre2[TAM_NOM];
+
+
+	if(pElemento1 != NULL && pElemento2 != NULL)
+	{
+
+		pPersona1 = (ePersona*) pElemento1;
+		pPersona2 = (ePersona*) pElemento2;
+
+		if(strcpy(bufferNombre1, pPersona1->nombre) && strcpy(bufferNombre2, pPersona2->nombre))
+		{
+			if(strncmp(bufferNombre1, bufferNombre2, TAM_NOM)> 0)
+			{
+
+				todoOk = 1;
+			}else
+			{
+				if(strncmp(bufferNombre1, bufferNombre2, TAM_NOM)< 0)
+				{
+					todoOk = -1;
+				}
+			}
+
+
+
+		}
+
+	}
+
+
+
+return todoOk;
+
 
 }

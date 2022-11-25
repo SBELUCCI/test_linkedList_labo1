@@ -46,6 +46,7 @@ LinkedList* ll_subList(LinkedList* this,int from,int to); //
 LinkedList* ll_clone(LinkedList* this);//
 int ll_sort(LinkedList* this, int (*pFunc)(void* ,void*), int order);
 
-// falta filter y map
+LinkedList* ll_filter(LinkedList* this, int(*pFunc)(void*));
+
 
 #endif /* LINKEDLIST_H_ */
