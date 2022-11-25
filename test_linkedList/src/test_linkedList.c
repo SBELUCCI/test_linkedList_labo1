@@ -42,6 +42,11 @@ int main(void) {
 	int (*pFiltrado)(void*);
 	int (*pOrdenar)(void*, void*);
 
+	//-------------------------add----------------------------------------
+	 puts("\nPROBANDO FUNCIONES DE LA LINKEDLIST DEL TP4");
+	 puts("\n\n\n-----------------------------------------");
+	 puts("Ejemplo de: ll_add\n Probamos agregar gente a la lista previamente creada con newLinkedList");
+
 	ePersona *persona1 = new_Persona();
 
 	strcpy(persona1->nombre, "Sofia Belucci");
@@ -73,6 +78,7 @@ int main(void) {
 	mostrarPersonas(listaPersonas);
 
 	//--------------set----------------------------------------------------------
+	 puts("\n\n\n-----------------------------------------");
 	puts("\n\nPor ej: ll_set:");
 	puts("Se setea cualquier tipo de dato de la estructura\n");
 	strcpy(persona4->nombre, "Jose Belucci");
@@ -82,6 +88,7 @@ int main(void) {
 	mostrarPersona(persona4);
 
 	//----------------index-----------------------------------------------------
+	 puts("\n\n\n-----------------------------------------");
 	puts("\n\nPor ej: ll_indexOf:");
 	puts(
 			"Se manda el puntero a la persona y nos devuelve el indice en el que esta\n");
@@ -94,6 +101,7 @@ int main(void) {
 	}
 
 	//----------------------isEmpty--------------------------------------------
+	 puts("\n\n\n-----------------------------------------");
 
 	puts("\n\nPor ej: ll_isEmpty:\n");
 
@@ -106,6 +114,7 @@ int main(void) {
 	}
 
 	//-------------------------------POP-----------------------------------------
+	 puts("\n\n\n-----------------------------------------");
 
 	puts("Ejemplo de ll_pop: ");
 
@@ -120,6 +129,7 @@ int main(void) {
 	}
 
 	//--------------------------contains--------------------------------------------
+	 puts("\n\n\n-----------------------------------------");
 
 	puts("\nEjemplo de ll_contains: ");
 
@@ -131,6 +141,7 @@ int main(void) {
 		puts("Esta persona no se encuentra en la lista");
 	}
 	//-------------------clone---------------------------------------------------
+	 puts("\n\n\n-----------------------------------------");
 
 	puts("\nEjemplo de ll_clone: ");
 	listaEmpleados = ll_clone(listaPersonas);
@@ -143,6 +154,7 @@ int main(void) {
 	}
 
 	//-------------------contains all---------------------------------------------
+	 puts("\n\n\n-----------------------------------------");
 
 	puts("\nEjemplo de ll_containsAll: ");
 	if(ll_containsAll(listaPersonas, listaEmpleados))
@@ -157,6 +169,7 @@ int main(void) {
 		puts("Faltan elementos en la lista");
 	}
 	//--------------------------clear----------------------------------------
+	 puts("\n\n\n-----------------------------------------");
 
 	puts("\nEjemplo de ll_clear: ");
 	if(!ll_clear(listaEmpleados))
@@ -169,6 +182,7 @@ int main(void) {
 	}
 
 	//---------------------sublist------------------------------------------------
+	 puts("\n\n\n-----------------------------------------");
 	puts("\nEjemplo de ll_sublist: ");
 	listaEmpleados = ll_subList(listaPersonas, 0, 3);
 	if(listaEmpleados != NULL)
@@ -182,6 +196,7 @@ int main(void) {
 	}
 
 	//--------------------------push-------------------------------------------
+	 puts("\n\n\n-----------------------------------------");
 
 	puts("\nEjemplo de ll_push: ");
 	if(!ll_push(listaEmpleados, 3, auxPersona))
@@ -196,6 +211,7 @@ int main(void) {
 	//--------------------------------------sort-----------------------------------
 
 
+
 	puts("\n\n\n-----------------------------------------");
 	puts("Ejemplo: ll_sort ordenando por nombre ascendente o descendente segun el criterio deseado\n");
 	 pOrdenar = ordenarPersonaNombre;
@@ -207,7 +223,8 @@ int main(void) {
 
 	//-----------------------filter---------------------------------------------
 
-	puts("\n\n\n");
+
+
 	puts("Ejemplo: ll_filter");
 
 	puts("Filtrar por mujeres:\n");
@@ -220,7 +237,37 @@ int main(void) {
 		pFiltrado = filtrarMayores;
 		LinkedList* mayores = ll_filter(listaEmpleados, pFiltrado);
 		mostrarPersonas(mayores);
+		//-----------------------remove---------------------------------------------
+		puts("\n\n\n-----------------------------------------");
 
+			puts("Ejemplo: ll_remove");
+
+
+			if(!ll_remove(listaEmpleados, 2))
+			{
+				//printf("Se elimino con exito al siguiente empleado: %s", persona4->nombre);
+				puts("Se elimino con exito al empleado\n");
+				mostrarPersonas(listaEmpleados);
+			}else
+			{
+				puts("No fue posible eliminar al empleado");
+			}
+
+			//---------------------------DELETE LINKEDLIST------------------------------
+
+
+			puts("\n\n\n-----------------------------------------");
+
+				puts("Ejemplo: ll_deleteLinkedList");
+
+
+				if(!ll_deleteLinkedList(listaEmpleados))
+				{
+					puts("Se elimino la linkedList exitosamente\n");
+				}else
+				{
+					puts("No fue posible eliminar esta linkedList");
+				}
 
 
 	return 0;
